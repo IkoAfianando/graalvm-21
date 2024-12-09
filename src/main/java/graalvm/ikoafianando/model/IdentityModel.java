@@ -2,9 +2,17 @@ package graalvm.ikoafianando.model;
 
 import java.util.UUID;
 
+import graalvm.ikoafianando.validation.ValidationGroups;
+import jakarta.validation.constraints.*;
+
 public class IdentityModel {
     private UUID id;
+
+    @NotBlank(message = "Name cannot be empty", groups = {ValidationGroups.Create.class})
     private String name;
+
+    @NotNull(message = "Age cannot be empty", groups = {ValidationGroups.Create.class})
+    @Min(value = 8, message = "Age must be greater than 0", groups = {ValidationGroups.Create.class})
     private int age;
 
     public IdentityModel() {

@@ -2,7 +2,9 @@ package graalvm.ikoafianando.controller;
 
 import graalvm.ikoafianando.model.IdentityModel;
 import graalvm.ikoafianando.service.IdentityService;
+import graalvm.ikoafianando.validation.ValidationGroups;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,7 +22,7 @@ public class IdentityController {
     }
 
     @PostMapping
-    public ResponseEntity<IdentityModel> createIdentity(@RequestBody IdentityModel identity) {
+    public ResponseEntity<IdentityModel> createIdentity(@Validated(ValidationGroups.Create.class)  @RequestBody IdentityModel identity) {
         IdentityModel identityModel = identityService.createIdentity(identity);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
